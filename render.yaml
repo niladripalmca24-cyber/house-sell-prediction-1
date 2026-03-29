@@ -2,5 +2,8 @@ services:
   - type: web
     name: house-pricing-dashboard
     env: python
-    buildCommand: pip install -r requirements.txt && python src/data_prep.py && python src/train.py
+    buildCommand: |
+      pip install -r requirements.txt
+      python src/data_prep.py
+      python src/train.py
     startCommand: uvicorn src.app:app --host 0.0.0.0 --port $PORT
