@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blob blob-1"></div>
+    <div class="background-blob blob-2"></div>
+    
+    <div class="glass-container">
+        <header>
+            <h1>House Price Predictor</h1>
+            <p>Upload your CSV dataset for instant ML-powered predictions</p>
+            {% if not models_loaded %}
+            <div class="alert error">Models are currently not loaded. Please train the models by running src/train.py first.</div>
+            {% endif %}
+        </header>
+
+        <div class="upload-zone" id="drop-zone">
+            <div class="upload-icon">📁</div>
+            <p>Drag & Drop your CSV file here</p>
+            <p class="sub-text">or</p>
+            <label for="file-input" class="btn-primary">Browse Files</label>
+            <input type="file" id="file-input" accept=".csv" hidden>
+        </div>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Analyzing features & running predictions...</p>
+        </div>
+
+        <div id="results-container" class="hidden">
+            <h2>Prediction Results</h2>
+            <div class="table-wrapper">
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>House ID</th>
+                            <th>Predicted Price</th>
+                            <th>Category Estimate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- Rows injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="reset-btn" class="btn-secondary">New Prediction</button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
